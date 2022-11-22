@@ -12,6 +12,7 @@ use opengl_graphics::{GlGraphics, OpenGL};
 struct Game {
     gl: GlGraphics,
     rake: Rake,
+    food: Food,
 }
 
 impl Game {
