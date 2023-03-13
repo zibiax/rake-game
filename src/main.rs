@@ -55,8 +55,8 @@ impl Game {
             use rand::thread_rng;
             let mut r = thread_rng();
             loop {
-                let new_x = r.gen_range(0, self.cols);
-                let new_y = r.gen_range(0, self.rows);
+                let new_x = r.gen_range(0.. self.cols);
+                let new_y = r.gen_range(0.. self.rows);
                 if !self.rake.is_collide(new_x, new_y) {
                     self.food = Food { x: new_x, y: new_y };
                     break;
@@ -203,7 +203,7 @@ fn main() {
     let HEIGHT = ROWS * SQUARE_WIDTH;
 
     let mut window: GlutinWindow = WindowSettings::new("Rake Game", [WIDTH, HEIGHT])
-        .opengl(opengl)
+   //     .opengl(opengl)
         .exit_on_esc(true)
         .build()
         .unwrap();
