@@ -1,8 +1,7 @@
-extern crate glutin_window;
-extern crate graphics;
 extern crate opengl_graphics;
+extern crate graphics;
+extern crate glutin_window;
 extern crate piston;
-
 extern crate rand;
 
 use piston::window::WindowSettings;
@@ -27,11 +26,10 @@ pub struct Game {
 
 impl Game {
     fn render(&mut self, args: &RenderArgs) {
-        use graphics;
 
         const BLACK: [f32; 4] = [0.0, 0.0, 0.0, 1.0];
 
-        self.gl.draw(args.viewport(), |c, gl| {
+        self.gl.draw(args.viewport(), |_c, gl| {
             graphics::clear(BLACK, gl);
         });
 
@@ -39,7 +37,7 @@ impl Game {
         self.food.render(&mut self.gl, args, self.square_width);
     }
 
-    fn update(&mut self, args: &UpdateArgs) -> bool {
+    fn update(&mut self, _args: &UpdateArgs) -> bool {
         if !self.rake.update(self.just_eaten, self.cols, self.rows) {
             return false;
         }
@@ -100,7 +98,6 @@ pub struct Rake_Piece(u32, u32);
 
 impl Rake {
     pub fn render(&mut self, args: &RenderArgs) {
-        use graphics;
 
         const GREEN: [f32; 4] = [0.0, 1.0, 0.0, 1.0];
 
@@ -174,7 +171,6 @@ impl Food {
     }
 
     fn render(&mut self, gl: &mut GlGraphics, args: &RenderArgs, width: u32) {
-        use graphics;
 
         const RED: [f32; 4] = [1.0, 0.0, 0.0, 1.0];
 
@@ -199,10 +195,10 @@ fn main() {
     const ROWS: u32 = 20;
     const SQUARE_WIDTH: u32 = 20;
 
-    let WIDTH = COLS * SQUARE_WIDTH;
-    let HEIGHT = ROWS * SQUARE_WIDTH;
+    let width = COLS * SQUARE_WIDTH;
+    let height = ROWS * SQUARE_WIDTH;
 
-    let mut window: GlutinWindow = WindowSettings::new("Rake Game", [WIDTH, HEIGHT])
+    let mut window: GlutinWindow = WindowSettings::new("Rake Game", [width, height])
    //     .opengl(opengl)
         .exit_on_esc(true)
         .build()
