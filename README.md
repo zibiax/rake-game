@@ -1,3 +1,4 @@
+![GitHub Workflow Status](https://github.com/zibiax/rake-game/actions/workflows/rust.yml/badge.svg)
 # rake-game
 
 Snake game using rust with piston library for graphics etc. :gear:
