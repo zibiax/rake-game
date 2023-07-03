@@ -88,13 +88,13 @@ enum Direction {
 
 pub struct Rake {
     gl: GlGraphics,
-    rake_parts: LinkedList<Rake_Piece>,
+    rake_parts: LinkedList<RakePiece>,
     width: u32,
     d: Direction,
 }
 
 #[derive(Clone)]
-pub struct Rake_Piece(u32, u32);
+pub struct RakePiece(u32, u32);
 
 impl Rake {
     pub fn render(&mut self, args: &RenderArgs) {
@@ -103,7 +103,7 @@ impl Rake {
 
         let squares: Vec<graphics::types::Rectangle> = self.rake_parts
             .iter()
-            .map(|p| Rake_Piece(p.0 * self.width, p.1 * self.width))
+            .map(|p| RakePiece(p.0 * self.width, p.1 * self.width))
             .map(|p| graphics::rectangle::square(p.0 as f64, p.1 as f64, self.width as f64))
             .collect();
 
@@ -118,7 +118,7 @@ impl Rake {
 
     /// Move the rake if valid, otherwise returns false.
     pub fn update(&mut self, just_eaten: bool, cols: u32, rows: u32) -> bool {
-        let mut new_front: Rake_Piece =
+        let mut new_front: RakePiece =
             (*self.rake_parts.front().expect("No front of rake found.")).clone();
 
         if (self.d == Direction::UP && new_front.1 == 0)
@@ -214,7 +214,7 @@ fn main() {
         score: 0,
         rake: Rake {
             gl: GlGraphics::new(opengl),
-            rake_parts: LinkedList::from_iter((vec![Rake_Piece(COLS / 2, ROWS / 2)]).into_iter()),
+            rake_parts: LinkedList::from_iter((vec![RakePiece(COLS / 2, ROWS / 2)]).into_iter()),
             width: SQUARE_WIDTH,
             d: Direction::DOWN,
         },
